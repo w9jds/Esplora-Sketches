@@ -1,14 +1,7 @@
 /* 
-   Created Dec 27, 2012
+   Created Jan 4, 2013
    by w9jds (Jeremy Shore)
 
-   Code to use the Arduino Esplora as the controller for
-   the SNES9X Emulator. Now all you have to do is click down
-   on the joystick to change the mapping on the buttons! Still
-   set up as top = right trigger, left = left trigger, right = start,
-   left = select and standard snes buttons. It is set up for the
-   buttons that are automatically set by SNES9X. Also the LED lights
-   up pink for the pink buttons and purple for the purple buttons.
 */
 
 #include <Esplora.h>
