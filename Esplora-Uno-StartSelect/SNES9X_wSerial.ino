@@ -1,19 +1,10 @@
 /* 
    Created Dec 27, 2012
    by w9jds (Jeremy Shore)
-
-   Code to use the Arduino Esplora as the controller for
-   the SNES9X Emulator. Now all you have to do is click down
-   on the joystick to change the mapping on the buttons! Still
-   set up as top = right trigger, left = left trigger, right = start,
-   left = select and standard snes buttons. It is set up for the
-   buttons that are automatically set by SNES9X. Also the LED lights
-   up pink for the pink buttons and purple for the purple buttons.
 */
 
 #include <Esplora.h>
 
-String Input = "";
 boolean lastbtnStates[9];
 boolean secButtons = false; // decides when to map the buttons differently
 
@@ -22,23 +13,26 @@ const char corspKeys[] = {KEY_DOWN_ARROW, KEY_UP_ARROW, KEY_LEFT_ARROW, KEY_RIGH
 const char seccorspKeys[] = {KEY_DOWN_ARROW, KEY_UP_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, 'c', 's', 'a', 'v'};
 
 void setup() {
-  Keyboard.begin();
   Serial1.begin(9400);
+  Keyboard.begin();
 };
 
 void loop() {
 
   if (Serial1.available() > 0){ 
-    Input = Serial1.readStringUntil(';');
+    String Input = Serial1.readStringUntil(';');
     if (Input == "Select"){
       Keyboard.press(KEY_RETURN);
-      Input = "";
+      delay(20);
+      Keyboard.release(KEY_RETURN);
     }
     if (Input == "Start"){
       Keyboard.press(' ');
-      Input = "";
-    }
+      delay(20);
+      Keyboard.release(' '); 
+    } 
   }
+ 
   for (byte Button = 0; Button <= 8; Button++) {  
     if (Button == 8) { //if checking the joystick switch
       boolean newState = Esplora.readButton(buttons[Button]);
