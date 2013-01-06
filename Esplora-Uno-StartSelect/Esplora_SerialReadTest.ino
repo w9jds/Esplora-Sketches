@@ -1,3 +1,9 @@
+/* 
+   Created Jan 4, 2013
+   by w9jds (Jeremy Shore)
+*/
+
+
 #include <Esplora.h>
 
 void setup(){
